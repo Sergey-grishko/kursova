@@ -81,11 +81,11 @@ class Dashboard extends Component {
         let userCount = this.props.store.infoDashboard.userCount;
         let reportCount = this.props.store.infoDashboard.reportCount;
         return (
-            <div className="content">
-                {this.state.isLoading ? (
-                    <div className="Loading_div">
-                        <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
-                    </div>) : null}
+            <div>{this.state.isLoading ? (
+                <div className="Loading_div">
+                    <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
+                </div>) : null}
+            <div className="content" style={this.state.isLoading ? {opacity: 0.4} : null}>
                 <div className="dashboard_1">
                     <p className="content_title">Overview</p>
                     <AreaChart width={750} height={160} data={data}
@@ -132,6 +132,7 @@ class Dashboard extends Component {
                         Use&nbsp;<a href="">this form</a>&nbsp;to contact us</h4>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

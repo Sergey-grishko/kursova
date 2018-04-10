@@ -144,11 +144,12 @@ class User extends Component {
             );
         });
          return (
-            <div className="content">
-                {this.state.isLoading ? (
-                    <div className="Loading_div">
-                        <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
-                    </div>) : null}
+             <div>
+             {this.state.isLoading ? (
+                 <div className="Loading_div">
+                     <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
+                 </div>) : null}
+            <div className="content"  style={this.state.isLoading ? {opacity: 0.4} : null}>
                 <div>
                     <div className="users_header">
                         <RaisedButton className="button_users" onClick={this.handleOpen} primary={true} label="ADD NEW USER" icon={<i className="material-icons">person_add</i>} />
@@ -231,6 +232,7 @@ class User extends Component {
                     </div>
                 </div>
             </div>
+             </div>
         );
     }
 }

@@ -143,11 +143,11 @@ class Reports extends Component {
         });
         let sum = reports.length * this.props.store.infoCompany.orderValue;
         return (
-            <div className="content">
-                {this.state.isLoading ? (
-                    <div className="Loading_div">
-                        <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
-                    </div>) : null}
+            <div> {this.state.isLoading ? (
+                <div className="Loading_div">
+                    <ReactLoading className="Loading" type="spinningBubbles" color="#00bcd4" height='200px' width='200px'/>
+                </div>) : null}
+            <div className="content" style={this.state.isLoading ? {opacity: 0.4} : null}>
                 <div className="reports">
                     {reports.length === 0 ? (
                             <h3 className="report_empty"><i className="material-icons">info_outline</i>Report list is empty</h3>
@@ -225,6 +225,7 @@ class Reports extends Component {
                         <Filter/>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
