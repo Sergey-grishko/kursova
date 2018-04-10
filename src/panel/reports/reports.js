@@ -22,6 +22,7 @@ import Filter from "./filter"
 import Snackbar from 'material-ui/Snackbar';
 import {toast} from "react-toastify";
 import ReactLoading from 'react-loading';
+import {host} from '../../Host.js'
 
 const defaultState={
     open:false,
@@ -76,6 +77,7 @@ class Reports extends Component {
     };
     handleClose = () => {
         this.setState({open: false});
+        this.props.history.push('/panel/reports/')
     };
 
     OnPaid(_id, category_id, comment,approved ){
@@ -170,8 +172,8 @@ class Reports extends Component {
                                     onRequestClose={this.handleClose}
                                 >
                                    <div className="details">
-                                       <a href={`http://web.bidon-tech.com:65059/images/${this.state.image}`} className="img_block">
-                                           <img src={`http://web.bidon-tech.com:65059/images/${this.state.image}`} alt={this.state.name} className="img_reports"/>
+                                       <a href={host+`images/${this.state.image}`} className="img_block">
+                                           <img src={ host +`images/${this.state.image}`} alt={this.state.name} className="img_reports"/>
                                        </a>
                                        <List className="list_block" >
                                            <Subheader inset={true} >Information</Subheader>

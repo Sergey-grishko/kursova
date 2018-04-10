@@ -1,7 +1,6 @@
 import { store } from '../App';
 import { actionType } from '../reducers/Company'
-
-const host = "http://web.bidon-tech.com:65059/";
+import {host} from '../Host'
 
 export async function infoCompany() {
     const token = await localStorage.getItem('token');

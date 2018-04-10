@@ -1,6 +1,4 @@
-
-const host = "http://web.bidon-tech.com:65059";
-
+import {host} from '../Host'
 
 export async function login (login, password) {
 let response = await fetch(host + "/company/login",

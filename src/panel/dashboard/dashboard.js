@@ -10,6 +10,7 @@ import dateFormat from 'dateformat'
 import {List, ListItem} from 'material-ui/List'
 import {connect} from "react-redux";
 import ReactLoading from 'react-loading';
+import {host} from '../../Host'
 
 
 const data = [
@@ -67,7 +68,7 @@ class Dashboard extends Component {
                     key={index}
                     primaryText={this.userName(value.user_id) + " at "  + dateFormat(value.date, "dd-mm-yyyy HH:MM")}
                     rightIcon={<i className="material-icons">inbox</i>}
-                    leftAvatar={<Avatar src={`http://web.bidon-tech.com:65059/images/${value.image}`} />}
+                    leftAvatar={<Avatar src={host + `images/${value.image}`} />}
                     onClick={this.reportOnClick.bind(this, value._id)}
                 >
                 </ListItem>

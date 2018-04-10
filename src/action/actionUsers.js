@@ -1,8 +1,7 @@
 import { store } from '../App';
 import { actionType } from '../reducers/Company'
+import {host} from '../Host'
 
-
-const host = "http://web.bidon-tech.com:65059/";
 
 export async function infoUsers() {
     let token = localStorage.getItem('token');
@@ -38,12 +37,8 @@ export async function addUser(fullName, email, password) {
                 active: true,
             })
         });
-    let data = await response.json();
-    if (data.error) {
-        console.log(data.message.toString());
-    }else {
-        infoUsers();
-    }
+   return response
+
 }
 
 export async function EditUsers(_id, fullName, email, password, active) {

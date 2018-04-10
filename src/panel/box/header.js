@@ -58,7 +58,7 @@ class Header extends Component {
             //------------
             let company = {...this.state};
             Info.changeCompany(company);
-            toast.success("success");
+            toast.success("Company data changed");
             this.setState({open: false});
         }
         catch (e) {

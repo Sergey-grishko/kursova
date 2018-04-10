@@ -21,7 +21,7 @@ import {
 import ReactLoading from 'react-loading';
 
 
-const defaultstate={
+const defaultValue={
     open:false,
     search:"",
     fullName:"",
@@ -40,7 +40,7 @@ class User extends Component {
     constructor(props){
         super(props);
         this.state = {
-            ...defaultstate
+            ...defaultValue
         };
         this.onSubmit = this.onSubmit.bind(this)
     };
@@ -50,7 +50,7 @@ class User extends Component {
     };
 
     handleClose = () => {
-        this.setState({...defaultstate});
+        this.setState({...defaultValue});
     };
 
     editOpen = (value) =>{
@@ -78,14 +78,23 @@ class User extends Component {
             }
             //------------
             this.state.edit ?
-                UserInfo.EditUsers(this.state._id, this.state.fullName, this.state.email, this.state.password, this.state.active):
-                UserInfo.addUser(this.state.fullName, this.state.email, this.state.password);
-            this.state.edit ?
-                toast.success("User has been changes"):
-                toast.success("User has been creating");
-            this.setState(defaultstate);
+                UserInfo.EditUsers(this.state._id, this.state.fullName, this.state.email, this.state.password, this.state.active)
+                    .then(()=>this.setState(defaultValue))
+                    .then(()=>toast.success('User has been changes')):
+                UserInfo.addUser(this.state.fullName, this.state.email, this.state.password)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        if (res.error) {
+                            toast.error(res.message);
+                        } else {
+                            toast.success('User has been creating');
+                            UserInfo.infoUsers();
+                            this.setState(defaultValue);
+                        }
+                    });
         }
         catch (e) {
+            console.log("error");
             toast.error(e.message);
         }
     }
@@ -93,7 +102,7 @@ class User extends Component {
     OnToggled(value){
         value.active = !value.active;
         UserInfo.EditUsers(value._id, value.fullName, value.email, value.password, value.active);
-        toast.success("success");
+        toast.success("Status changed");
     }
 
     Search(){
