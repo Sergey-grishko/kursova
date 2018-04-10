@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import FlatButton from 'material-ui/FlatButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import * as actionAuth from "../panel/action/actionAuth"
 
 
 
@@ -38,25 +39,8 @@ export class Reg extends Component {
             company.orderValue = company.orderValue.replace(',','.');
             if(isNaN(company.orderValue)) throw new Error('Report value is invalid. Must be a number');
             toast.success('Your company successfully registered. Now you can login in panel and start work.');
-            fetch("http://web.bidon-tech.com:65059/company",
-                {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    body: JSON.stringify({
-                        name: this.state.name,
-                        ownerEmail: this.state.ownerEmail,
-                        ownerPassword: this.state.ownerPassword,
-                        description: this.state.description,
-                        logo: "noLogo",
-                        imageQuality: this.state.imageQuality,
-                        orderValue: this.state.orderValue,
-                        active: true,
-                        language: this.state.language
-                    })
-                }).then((response) => response.json())
+            actionAuth.Reg(this.state)
+            .then((response) => response.json())
                 .then((res) => {
                     if (res.error) {
                         toast.error(res.message);

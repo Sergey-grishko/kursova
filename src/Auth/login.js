@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router-dom'
 import {ToastContainer, toast} from 'react-toastify';
 import ReactLoading from 'react-loading';
+import * as actionAuth from "../panel/action/actionAuth"
 
 
 
@@ -29,18 +30,8 @@ export class Sign extends Component {
     onSubmit(e) {
         e.preventDefault();
         this.setState({isLoading: true});
-        fetch("http://web.bidon-tech.com:65059/company/login",
-            {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    ownerEmail: this.state.email,
-                    ownerPassword: this.state.password,
-                })
-            }).then((response) => response.json())
+        actionAuth.login(this.state.email, this.state.password)
+            .then((response) => response.json())
             .then(async(res) => {
                     this.setState({isLoading: false});
                     if (res.error) {
