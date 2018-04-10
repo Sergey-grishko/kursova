@@ -63,6 +63,7 @@ class Dashboard extends Component {
                 Reports list is empty
             </div>
             ): this.props.store.infoDashboard.lastFiveReports.map((value, index) =>{
+            if(value !== null){
             return(
                 <ListItem
                     key={index}
@@ -72,7 +73,7 @@ class Dashboard extends Component {
                     onClick={this.reportOnClick.bind(this, value._id)}
                 >
                 </ListItem>
-            )
+            )}else return null;
         });
         console.log(report);
         let totalSpace = this.props.store.infoCompany.totalSpace;
