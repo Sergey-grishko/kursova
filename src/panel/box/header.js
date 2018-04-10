@@ -53,7 +53,7 @@ class Header extends Component {
             if (this.state.name.length <= 3) throw new Error('Company name must be at least 3 characters');
             if (this.state.description.length < 3) throw new Error('Company description must be at least 16 characters');
             if (!EmailRegex.test(this.state.ownerEmail)) throw new Error('Email is invalid');
-            if (this.state.ownerPassword.length < 6) throw new Error('Password must be at least 6 characters');
+            if (this.state.ownerPassword.length >=1 && this.state.ownerPassword.length < 6) throw new Error('Password must be at least 6 characters');
             if (isNaN(this.state.orderValue)) throw new Error('Report value is invalid. Must be a number');
             //------------
             let company = {...this.state};

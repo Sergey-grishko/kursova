@@ -71,9 +71,9 @@ class User extends Component {
         try {
             if (this.state.fullName.length <= 1) throw new Error('FullName must be at least 2 characters');
             if (!emailRegex.test(this.state.email)) throw new Error('Email is invalid');
-            if (this.state.password.length < 6) throw new Error('Password must be at least 6 characters');
+            if (this.state.password.length >=1 && this.state.password.length < 6) throw new Error('Password must be at least 6 characters');
             if(this.state.password !== this.state.confirmPassword){ throw new Error('Passwords is invalid')
-            }else if (this.state.password.length < 6){
+            }else if (this.state.password.length >=1 && this.state.password.length < 6){
                 throw new Error('Password must be at least 6 characters');
             }
             //------------
