@@ -8,7 +8,7 @@ import Dialog from 'material-ui/Dialog';
 import {connect} from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import * as Info from '../action/action'
+import * as Info from '../../action/action'
 
 
 

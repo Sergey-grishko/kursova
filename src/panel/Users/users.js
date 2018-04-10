@@ -3,7 +3,7 @@ import '../../App.css';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import * as UserInfo from "../action/actionUsers";
+import * as UserInfo from "../../action/actionUsers";
 import {toast} from "react-toastify";
 import {connect} from "react-redux";
 import Toggle from 'material-ui/Toggle';
@@ -21,8 +21,6 @@ import {
 import ReactLoading from 'react-loading';
 
 
-
-
 const defaultstate={
     open:false,
     search:"",
@@ -38,14 +36,12 @@ const defaultstate={
 
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-
 class User extends Component {
     constructor(props){
         super(props);
         this.state = {
             ...defaultstate
         };
-
         this.onSubmit = this.onSubmit.bind(this)
     };
 
@@ -73,7 +69,6 @@ class User extends Component {
 
     onSubmit () {
         try {
-
             if (this.state.fullName.length <= 1) throw new Error('FullName must be at least 2 characters');
             if (!emailRegex.test(this.state.email)) throw new Error('Email is invalid');
             if (this.state.password.length < 6) throw new Error('Password must be at least 6 characters');
@@ -108,7 +103,6 @@ class User extends Component {
         });
         return Slist
     }
-
 
     render() {
         const actions = [

@@ -1,4 +1,4 @@
-import {store} from "../../App";
+import {store} from "../App";
 import {actionType} from "../reducers/Company";
 
 export async function ReportFilter(listReports) {

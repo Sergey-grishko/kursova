@@ -1,6 +1,5 @@
-import { store } from '../../App';
+import { store } from '../App';
 import { actionType } from '../reducers/Company'
-
 
 const host = "http://web.bidon-tech.com:65059/";
 
@@ -16,7 +15,7 @@ export async function infoCompany() {
         store.dispatch({
             type: actionType.INFO_COMPANY,
             payload: res.message
-        })
+        });
         return res;
     });
 }

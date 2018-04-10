@@ -1,5 +1,5 @@
 import {actionType} from "../reducers/Company";
-import {store} from "../../App";
+import {store} from "../App";
 import {infoUsers} from "./actionUsers";
 
 const host = "http://web.bidon-tech.com:65059/";

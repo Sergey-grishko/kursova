@@ -3,8 +3,8 @@ import '../../App.css';
 import {AreaChart,Area,XAxis,YAxis,Tooltip} from 'recharts';
 import LinearProgress from 'material-ui/LinearProgress';
 import {NavLink, withRouter} from 'react-router-dom';
-import * as DasInfo from '../action/actionDashboard';
-import * as userInfo from '../action/actionUsers';
+import * as DasInfo from '../../action/actionDashboard';
+import * as userInfo from '../../action/actionUsers';
 import Avatar from 'material-ui/Avatar';
 import dateFormat from 'dateformat'
 import {List, ListItem} from 'material-ui/List'
@@ -21,7 +21,6 @@ const data = [
     {name: '17.03.18', paid: 0, total: 3},
     {name: '18.03.18', paid: 0, total: 0},
 ];
-
 
 
 class Dashboard extends Component {
@@ -63,7 +62,6 @@ class Dashboard extends Component {
                 Reports list is empty
             </div>
             ): this.props.store.infoDashboard.lastFiveReports.map((value, index) =>{
-            if(value !== null){
             return(
                 <ListItem
                     key={index}
@@ -73,7 +71,7 @@ class Dashboard extends Component {
                     onClick={this.reportOnClick.bind(this, value._id)}
                 >
                 </ListItem>
-            )}else return null;
+            )
         });
         console.log(report);
         let totalSpace = this.props.store.infoCompany.totalSpace;

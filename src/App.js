@@ -3,13 +3,13 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {createStore, applyMiddleware} from 'redux';
-import {Sign} from './Auth/login';
-import {Reg} from './Auth/reg'
+import {Sign} from './panel/Auth/login';
+import {Reg} from './panel/Auth/reg'
 import {Provider} from 'react-redux';
 import './App.css';
 import {Panel} from "./panel/box/index";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Info from  './panel/reducers/Company';
+import Info from './reducers/Company';
 import logger from 'redux-logger';
 
 

@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {Link} from 'react-router-dom'
 import {ToastContainer, toast} from 'react-toastify';
 import ReactLoading from 'react-loading';
-import * as actionAuth from "../panel/action/actionAuth"
+import * as actionAuth from "../../action/actionAuth"
 
 
 
@@ -26,7 +26,6 @@ export class Sign extends Component {
         }
     }
 
-
     onSubmit(e) {
         e.preventDefault();
         this.setState({isLoading: true});
@@ -41,10 +40,8 @@ export class Sign extends Component {
                        await localStorage.setItem("token", res.message.token);
                         this.props.history.push('/panel/dashboard')
                     }
-
             })
     }
-
 
     render() {
         return (
@@ -76,7 +73,6 @@ export class Sign extends Component {
                         value={this.state.password}
                         onChange={e => this.setState({password: e.target.value})}
                         multiLine={false}
-
                     />
                     <FlatButton
                         label="SING IN"
@@ -86,7 +82,6 @@ export class Sign extends Component {
                         up</Link></a>&#160; your company</h5>
                 </form>
                 <ToastContainer autoClose={5000}/>
-
             </div>
         );
     }

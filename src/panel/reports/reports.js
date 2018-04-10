@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../../App.css';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import * as infoReports from "../action/actionReports";
-import * as infoUsers from "../action/actionUsers";
+import * as infoReports from "../../action/actionReports";
+import * as infoUsers from "../../action/actionUsers";
 import {
     Table,
     TableBody,
@@ -82,7 +82,7 @@ class Reports extends Component {
         approved = !approved;
         infoReports.EditReport(_id, category_id, comment, approved );
         this.setState({approved: true});
-        toast.success("success");
+        toast.success("Report is paid");
     }
 
 

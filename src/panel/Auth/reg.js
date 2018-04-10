@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import FlatButton from 'material-ui/FlatButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import * as actionAuth from "../panel/action/actionAuth"
+import * as actionAuth from "../../action/actionAuth"
 
 
 
@@ -30,7 +30,6 @@ export class Reg extends Component {
      onSubmit(e){
         e.preventDefault();
         let company = Object.assign({}, this.state);
-
         try{
             if(company.name.length < 3) throw new Error('Company name to small');
             if(company.description.length < 3) throw new Error('Company description to small');
@@ -53,11 +52,6 @@ export class Reg extends Component {
             toast.error(e.message || e)
         }
     }
-
-
-
-
-
 
     render() {
         return (
