@@ -20,7 +20,7 @@ import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Filter from "./filter"
 import Snackbar from 'material-ui/Snackbar';
-import {toast} from "react-toastify";
+import {toast,ToastContainer} from "react-toastify";
 import ReactLoading from 'react-loading';
 import {host} from '../../Host.js'
 
@@ -67,6 +67,19 @@ class Reports extends Component {
             let id = this.props.location.state;
             this.handleOpen(id)
         }
+    }
+
+    allPaid (){
+        let rows = this.state.rows;
+        rows.map(value => {
+            let mas = this.props.reports.filter(val=>value===val._id);
+            mas.map(v => {
+                // usReport.EditReport(v._id, v.category_id, v.comment, !v.approved);
+                infoReports.EditReport(v._id, v.category_id, v.comment, true);
+                toast.success("Report is paid");
+            })
+        });
+        this.setState({rows:[]})
     }
 
 
@@ -162,7 +175,7 @@ class Reports extends Component {
                                     open={this.state.rows.length > 0}
                                     message={text_sneck}
                                     action="Paid"
-                                    onActionClick={() =>this.OnPaid(this.state.rows, this.state.category_id, this.state.comment, false)}
+                                    onActionClick={() =>this.allPaid()}
                                 />
                                 {console.log(this.state.rows)}
                                 <Dialog
@@ -228,6 +241,7 @@ class Reports extends Component {
                         <Filter/>
                     </div>
                 </div>
+                <ToastContainer/>
             </div>
             </div>
         );

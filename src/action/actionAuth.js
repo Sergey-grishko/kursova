@@ -1,7 +1,7 @@
 import {host} from '../Host'
 
 export async function login (login, password) {
-let response = await fetch(host + "/company/login",
+let response = await fetch(host + "company/login",
     {
         headers: {
             'Accept': 'application/json',
@@ -17,7 +17,7 @@ let response = await fetch(host + "/company/login",
 }
 
 export async function Reg (information) {
-    let response = await fetch(host + "/company",
+    let response = await fetch(host + "company",
         {
             headers: {
                 'Accept': 'application/json',

@@ -4,7 +4,7 @@ export const actionType = {
     INFO_DASHBOARD:'INFO_DASHBOARD',
     INFO_USERS: 'INFO_USERS',
     INFO_REPORTS: 'INFO_REPORTS',
-    FILTER:'FILTER',
+    LIST:'LIST',
     FILTER_USER: "FILTER_USER",
 
 };
@@ -60,7 +60,7 @@ export default function Info(state = defaultState, action) {
         case "INFO_REPORTS":
             return {...state, infoReports: action.payload};
             break;
-        case "FILTER":
+        case "LIST":
             return {...state, list: action.payload};
             break;
         case "FILTER_USER":

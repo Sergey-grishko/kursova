@@ -41,7 +41,7 @@ export async function EditReport(_id, category_id, comment, approved) {
     if (data.error) {
         console.log(data.message.toString());
     }else {
-        infoUsers();
+        infoReports();
     }
 }
 

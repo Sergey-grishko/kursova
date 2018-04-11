@@ -4,7 +4,7 @@ import {host} from "../Host";
 
 export async function ReportFilter(listReports) {
     store.dispatch({
-        type: actionType.FILTER,
+        type: actionType.LIST,
         payload: listReports
     })
 }
@@ -13,13 +13,11 @@ export async function defaultInfo() {
     store.dispatch({
         type: actionType.DEFAULT
     })
-
 }
 
 export async function OnExport(type) {
     let token = localStorage.getItem('token');
-    var filter = '';
-
+    let filter = '';
     let state = store.getState();
 
     if (state.filter.user_id !== 'all') {
@@ -29,7 +27,8 @@ export async function OnExport(type) {
     }
 
     if (state.filter.user_id !== 'all') {
-        filter += '&user_id=' + state.filter.user_id
+        filter += '&user_id=' + state.filter.user_id;
+        console.log(state.filter.user_id)
     }
 
     let response = await fetch(host + filter,
