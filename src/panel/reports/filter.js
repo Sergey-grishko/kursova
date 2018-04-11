@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider'
 import * as ReportFilter from "../../action/actionFilter";
-import XlsExport from "xlsexport"
+// import XlsExport from "xlsexport"
 
 
 const style={
@@ -32,14 +32,18 @@ class Filter extends Component {
     }
 
     searchReports() {
-        if (this.state.id === "all") {
+        if (this.props.reportFilter.user_id === "all") {
             ReportFilter.ReportFilter(this.props.reports);
         } else {
             let rList = this.props.reports.filter((val) => {
-                return val.user_id === this.state.id;
+                return val.user_id === this.props.reportFilter.user_id;
             });
             ReportFilter.ReportFilter(rList);
         }
+    }
+
+    selectedUser(event, key, user) {
+        ReportFilter.user(user)
     }
 
     // PaidReports(){
@@ -50,47 +54,51 @@ class Filter extends Component {
     //     }
     // }
 
-    userName(user_id) {
-        let user = this.props.users.find(value => {
-            return value._id === user_id
-        });
-        if (user === undefined) {
-            return null;
-        } else {
-            return user.fullName;
-        }
-    }
+    // userName(user_id) {
+    //     let user = this.props.users.find(value => {
+    //         return value._id === user_id
+    //     });
+    //     if (user === undefined) {
+    //         return null;
+    //     } else {
+    //         return user.fullName;
+    //     }
+    // }
+    //
+    // userEmail(user_id) {
+    //     let user = this.props.users.find(value => {
+    //         return value._id === user_id
+    //     });
+    //     if (user === undefined) {
+    //         return null;
+    //     } else {
+    //         return user.email;
+    //     }
+    // }
 
-    userEmail(user_id) {
-        let user = this.props.users.find(value => {
-            return value._id === user_id
-        });
-        if (user === undefined) {
-            return null;
-        } else {
-            return user.email;
-        }
-    }
+    // onExcel(typeFormat) {
+    //     let allList = this.props.reportFilter === undefined ? this.props.reports : this.props.reportFilter;
+    //     let reports = [["Name", "Email", "ID", "Approved"]];
+    //
+    //     for (let i = 0; i < allList.length; i++) {
+    //         let name = allList.map(value => this.userName(value.user_id));
+    //         let email = allList.map(value => this.userEmail(value.user_id));
+    //         let reportId = allList.map(value => value._id);
+    //         let reportApproved = allList.map(value => value.approved);
+    //         reports.push([name[i], email[i], reportId[i], reportApproved[i]])
+    //     }
+    //     let xls = new XlsExport(reports, "Reports");
+    //
+    //     if (typeFormat === "xls") {
+    //         xls.exportToXLS('reports.xls');
+    //     } else if (typeFormat === "csv") {
+    //         xls.exportToCSV('reports.csv');
+    //     }
+    //
+    // }
 
-    onExcel(typeFormat) {
-        let allList = this.props.reportFilter === undefined ? this.props.reports : this.props.reportFilter;
-        let reports = [["Name", "Email", "ID", "Approved"]];
-
-        for (let i = 0; i < allList.length; i++) {
-            let name = allList.map(value => this.userName(value.user_id));
-            let email = allList.map(value => this.userEmail(value.user_id));
-            let reportId = allList.map(value => value._id);
-            let reportApproved = allList.map(value => value.approved);
-            reports.push([name[i], email[i], reportId[i], reportApproved[i]])
-        }
-        let xls = new XlsExport(reports, "Reports");
-
-        if (typeFormat === "xls") {
-            xls.exportToXLS('reports.xls');
-        } else if (typeFormat === "csv") {
-            xls.exportToCSV('reports.csv');
-        }
-
+    async onExport(type){
+        await ReportFilter.OnExport(type);
     }
 
 
@@ -105,12 +113,13 @@ class Filter extends Component {
                 <p><i className="material-icons">filter_list</i>Filter</p>
                 <SelectField
                     floatingLabelText="Users"
-                    value={this.state.id}
-                    onChange={(event, index, value) => this.setState({id:value})}
+                    value={this.props.reportFilter.user_id}
+                    onChange={this.selectedUser.bind(this)}
                     style={style.customWidth}>
                     <MenuItem value={'all'} primaryText="All Users" />
                     {users}
                 </SelectField>
+                {console.log("filter",this.props.reportFilter)}
                 {/*<SelectField*/}
                     {/*floatingLabelText="Paid"*/}
                     {/*value={this.state.paid}*/}
@@ -133,15 +142,14 @@ class Filter extends Component {
                     mode="landscape"
                     fullWidth
                 />
-                {console.log("date", this.state.dateFrom)}
                 <div className="filter_button">
                     <RaisedButton label="Refresh" primary={true} onClick={() => this.searchReports()}  fullWidth />
                     <FlatButton label="Clear" onClick={() => this.setState({id:"all"}, () => this.searchReports()) }  fullWidth />
 
                     <Divider className="line"/>
 
-                    <FlatButton label="Export to xls" onClick={() => this.onExcel("xls")} icon={<i className="material-icons">file_download</i>} fullWidth />
-                    <FlatButton label="Export to csv" onClick={() => this.onExcel("csv")} icon={<i className="material-icons">file_download</i>} fullWidth />
+                    <FlatButton label="Export to xls" onClick={this.onExport.bind(this, 'xls')} icon={<i className="material-icons">file_download</i>} fullWidth />
+                    <FlatButton label="Export to csv" onClick={this.onExport.bind(this, 'csv')} icon={<i className="material-icons">file_download</i>} fullWidth />
                 </div>
             </div>
         );

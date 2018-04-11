@@ -4,7 +4,8 @@ export const actionType = {
     INFO_DASHBOARD:'INFO_DASHBOARD',
     INFO_USERS: 'INFO_USERS',
     INFO_REPORTS: 'INFO_REPORTS',
-    FILTER:'FILTER'
+    FILTER:'FILTER',
+    FILTER_USER: "FILTER_USER",
 
 };
 
@@ -31,8 +32,13 @@ const defaultState = {
     },
     infoUsers:[],
     infoReports:[],
-    filter:[],
+    list: [],
+    filter: {
+        user_id: 'all',
+    }
 };
+
+
 
 export default function Info(state = defaultState, action) {
     switch (action.type) {
@@ -52,8 +58,10 @@ export default function Info(state = defaultState, action) {
             return {...state, infoReports: action.payload};
             break;
         case "FILTER":
-            return {...state, filter: action.payload};
+            return {...state, list: action.payload};
             break;
+        case "FILTER_USER":
+            return {...state, filter: {...state.filter, user_id: action.user}};
         default:
             return state;
     }

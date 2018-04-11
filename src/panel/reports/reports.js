@@ -164,6 +164,7 @@ class Reports extends Component {
                                     action="Paid"
                                     onActionClick={() =>this.OnPaid(this.state.rows, this.state.category_id, this.state.comment, false)}
                                 />
+                                {console.log(this.state.rows)}
                                 <Dialog
                                     title="Report details"
                                     actions={actions}
@@ -233,4 +234,4 @@ class Reports extends Component {
     }
 }
 
-export default connect(store => ({store: store, reports: store.infoReports, users:store.infoUsers, filter:store.filter }))(withRouter(Reports))
+export default connect(store => ({store: store, reports: store.infoReports, users:store.infoUsers, filter:store.list }))(withRouter(Reports))
