@@ -9,6 +9,13 @@ export async function ReportFilter(listReports) {
     })
 }
 
+export async function defaultInfo() {
+    store.dispatch({
+        type: actionType.DEFAULT
+    })
+
+}
+
 export async function OnExport(type) {
     let token = localStorage.getItem('token');
     var filter = '';

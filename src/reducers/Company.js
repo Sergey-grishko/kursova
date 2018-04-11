@@ -46,7 +46,10 @@ export default function Info(state = defaultState, action) {
             return {...state, infoCompany: action.payload};
             break;
         case "DEFAULT":
-            return defaultState;
+            return {...state,
+                filter: {
+                    user_id: 'all',
+                }};
             break;
         case "INFO_DASHBOARD":
             return {...state, infoDashboard: action.payload};

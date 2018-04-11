@@ -128,7 +128,7 @@ class Reports extends Component {
             />,
         ];
         let text_sneck = this.state.rows.length + " reports where selected for the amount of " + this.state.rows.length * this.props.store.infoCompany.orderValue ;
-        let aList = this.props.filter === undefined ? this.props.reports : this.props.filter;
+        let aList = this.props.filter === undefined  ? this.props.reports : this.props.filter;
         const reports = aList.map((value, index) => {
             return (
                 <TableRow key={index} selected={this.state.rows.indexOf(value._id) > -1} selectable={!value.approved}>

@@ -25,11 +25,16 @@ class Filter extends Component {
             // paid:'all',
             dateFrom:{},
         };
+        this.searchReports = this.searchReports.bind(this)
+        this.defaultInfo = this.defaultInfo.bind(this)
     };
 
     async componentDidMount(){
         await ReportFilter.ReportFilter(this.state.reports)
     }
+
+
+
 
     searchReports() {
         if (this.props.reportFilter.user_id === "all") {
@@ -40,6 +45,11 @@ class Filter extends Component {
             });
             ReportFilter.ReportFilter(rList);
         }
+    }
+
+    defaultInfo(){
+        ReportFilter.defaultInfo();
+        ReportFilter.ReportFilter(this.props.reports);
     }
 
     selectedUser(event, key, user) {
@@ -144,7 +154,7 @@ class Filter extends Component {
                 />
                 <div className="filter_button">
                     <RaisedButton label="Refresh" primary={true} onClick={() => this.searchReports()}  fullWidth />
-                    <FlatButton label="Clear" onClick={() => this.setState({id:"all"}, () => this.searchReports()) }  fullWidth />
+                    <FlatButton label="Clear" onClick={this.defaultInfo}  fullWidth />
 
                     <Divider className="line"/>
 
