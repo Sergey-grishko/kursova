@@ -1,41 +1,14 @@
-import {host} from '../Host'
+import Api from "./api";
 
-export async function login (login, password) {
-let response = await fetch(host + "company/login",
-    {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({
-            ownerEmail: login,
-            ownerPassword: password,
-        })
-    });
-    return response
+export async function login(login) {
+    let res = await Api.post('company/login', login, false, true);
+    let data = await res.json()
+    !data.error && await Api.setTokenToLocalStorage(data.message.token)
+    return data
 }
-
-export async function Reg (information) {
-    let response = await fetch(host + "company",
-        {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({
-                name: information.name,
-                ownerEmail: information.ownerEmail,
-                ownerPassword: information.ownerPassword,
-                description: information.description,
-                logo: "noLogo",
-                imageQuality: information.imageQuality,
-                orderValue: information.orderValue,
-                active: true,
-                language: information.language
-            })
-        });
-    return response
-
+export async function Reg(information) {
+    let res = await Api.post('company', information, false, true);
+    let data = await res.json();
+    if(data.error) throw new Error(data.message);
+    return data
 }

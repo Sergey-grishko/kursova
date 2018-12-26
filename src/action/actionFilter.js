@@ -1,6 +1,6 @@
-import {store} from "../App";
+import {store} from "../index";
 import {actionType} from "../reducers/Company";
-import {host} from "../Host";
+import {host} from "../host";
 
 export async function ReportFilter(listReports) {
     store.dispatch({

@@ -1,18 +1,11 @@
-import { store } from '../App';
-import { actionType } from '../reducers/Company'
-import {host} from '../Host'
+import {store} from '../index';
+import {actionType} from '../reducers/Company'
+import Api from "./api";
 
 
 export async function infoUsers() {
-    let token = localStorage.getItem('token');
-    let response = await fetch(host + "user",
-        {
-            method: "GET",
-            headers: {
-                "Authorization": token
-            }
-        });
-    let data = await response.json();
+    let res = await Api.get('user', true);
+    let data = await res.json()
     store.dispatch({
         type: actionType.INFO_USERS,
         payload: data.message
@@ -20,49 +13,21 @@ export async function infoUsers() {
     return data
 }
 
-export async function addUser(fullName, email, password) {
-    let token = localStorage.getItem('token');
-    let response = await fetch(host + "user",
-        {
-            method: "POST",
-            headers: {
-                "Authorization": token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                fullName: fullName,
-                email: email,
-                password: password,
-                active: true,
-            })
-        });
-   return response
-
+export async function addUser(user) {
+    let res = await Api.post('user', user);
+    let data = await res.json()
+    return data
 }
 
-export async function EditUsers(_id, fullName, email, password, active) {
-    let token = localStorage.getItem('token');
-    let response = await fetch( host + "user",
-        {
-            method: "PUT",
-            headers: {
-                "Authorization": token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                _id: _id,
-                fullName: fullName,
-                email: email,
-                password: password,
-                active: active,
-            })
-        });
-    let data = await response.json();
+
+export async function EditUsers(user) {
+    let res = await Api.put('user', user);
+    let data = await res.json()
     if (data.error) {
         console.log(data.message.toString());
-    }else {
+    } else {
         infoUsers();
     }
+    return data
 }
+

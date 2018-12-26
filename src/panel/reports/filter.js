@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider'
 import * as ReportFilter from "../../action/actionFilter";
-// import XlsExport from "xlsexport"
+import XlsExport from "xlsexport"
 
 
 const style={
@@ -56,56 +56,56 @@ class Filter extends Component {
         ReportFilter.user(user)
     }
 
-    // PaidReports(){
-    //     if(this.state.paid === 'all'){
-    //         ReportFilter(this.props.reports)
-    //     }else {
-    //
-    //     }
-    // }
+    PaidReports(){
+        if(this.state.paid === 'all'){
+            ReportFilter(this.props.reports)
+        }else {
 
-    // userName(user_id) {
-    //     let user = this.props.users.find(value => {
-    //         return value._id === user_id
-    //     });
-    //     if (user === undefined) {
-    //         return null;
-    //     } else {
-    //         return user.fullName;
-    //     }
-    // }
-    //
-    // userEmail(user_id) {
-    //     let user = this.props.users.find(value => {
-    //         return value._id === user_id
-    //     });
-    //     if (user === undefined) {
-    //         return null;
-    //     } else {
-    //         return user.email;
-    //     }
-    // }
+        }
+    }
 
-    // onExcel(typeFormat) {
-    //     let allList = this.props.reportFilter === undefined ? this.props.reports : this.props.reportFilter;
-    //     let reports = [["Name", "Email", "ID", "Approved"]];
-    //
-    //     for (let i = 0; i < allList.length; i++) {
-    //         let name = allList.map(value => this.userName(value.user_id));
-    //         let email = allList.map(value => this.userEmail(value.user_id));
-    //         let reportId = allList.map(value => value._id);
-    //         let reportApproved = allList.map(value => value.approved);
-    //         reports.push([name[i], email[i], reportId[i], reportApproved[i]])
-    //     }
-    //     let xls = new XlsExport(reports, "Reports");
-    //
-    //     if (typeFormat === "xls") {
-    //         xls.exportToXLS('reports.xls');
-    //     } else if (typeFormat === "csv") {
-    //         xls.exportToCSV('reports.csv');
-    //     }
-    //
-    // }
+    userName(user_id) {
+        let user = this.props.users.find(value => {
+            return value._id === user_id
+        });
+        if (user === undefined) {
+            return null;
+        } else {
+            return user.fullName;
+        }
+    }
+
+    userEmail(user_id) {
+        let user = this.props.users.find(value => {
+            return value._id === user_id
+        });
+        if (user === undefined) {
+            return null;
+        } else {
+            return user.email;
+        }
+    }
+
+    onExcel(typeFormat) {
+        let allList = this.props.reportFilter === undefined ? this.props.reports : this.props.reportFilter;
+        let reports = [["Name", "Email", "ID", "Approved"]];
+
+        for (let i = 0; i < allList.length; i++) {
+            let name = allList.map(value => this.userName(value.user_id));
+            let email = allList.map(value => this.userEmail(value.user_id));
+            let reportId = allList.map(value => value._id);
+            let reportApproved = allList.map(value => value.approved);
+            reports.push([name[i], email[i], reportId[i], reportApproved[i]])
+        }
+        let xls = new XlsExport(reports, "Reports");
+
+        if (typeFormat === "xls") {
+            xls.exportToXLS('reports.xls');
+        } else if (typeFormat === "csv") {
+            xls.exportToCSV('reports.csv');
+        }
+
+    }
 
     async onExport(type){
         await ReportFilter.OnExport(type);
@@ -130,15 +130,15 @@ class Filter extends Component {
                     {users}
                 </SelectField>
                 {console.log("filter",this.props.reportFilter)}
-                {/*<SelectField*/}
-                    {/*floatingLabelText="Paid"*/}
-                    {/*value={this.state.paid}*/}
-                    {/*onChange={(event, index, value) => this.setState({paid:value})}*/}
-                    {/*style={style.customWidth}>*/}
-                    {/*<MenuItem value={'all'} primaryText="All" />*/}
-                    {/*<MenuItem value={'paid'} primaryText="Paid"/>*/}
-                    {/*<MenuItem value={'nopaid'} primaryText="Not Paid"/>*/}
-                {/*</SelectField>*/}
+                <SelectField
+                    floatingLabelText="Paid"
+                    value={this.state.paid}
+                    onChange={(event, index, value) => this.setState({paid:value})}
+                    style={style.customWidth}>
+                    <MenuItem value={'all'} primaryText="All" />
+                    <MenuItem value={'paid'} primaryText="Paid"/>
+                    <MenuItem value={'nopaid'} primaryText="Not Paid"/>
+                </SelectField>
                 <DatePicker
                     hintText="Date from"
                     floatingLabelText="Date from"

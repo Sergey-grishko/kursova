@@ -20,9 +20,9 @@ import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Filter from "./filter"
 import Snackbar from 'material-ui/Snackbar';
-import {toast,ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import ReactLoading from 'react-loading';
-import {host} from '../../Host.js'
+import {host} from '../../host.js'
 
 const defaultState={
     open:false,
@@ -74,7 +74,6 @@ class Reports extends Component {
         rows.map(value => {
             let mas = this.props.reports.filter(val=>value===val._id);
             mas.map(v => {
-                // usReport.EditReport(v._id, v.category_id, v.comment, !v.approved);
                 infoReports.EditReport(v._id, v.category_id, v.comment, true);
                 toast.success("Report is paid");
             })
@@ -140,7 +139,7 @@ class Reports extends Component {
                 onClick={() =>this.OnPaid(this.state._id, this.state.category_id, this.state.comment, this.state.approved)}
             />,
         ];
-        let text_sneck = this.state.rows.length + " reports where selected for the amount of " + this.state.rows.length * this.props.store.infoCompany.orderValue ;
+        let text_sneck = this.state.rows.length + " reports where selected for the amount of " + this.state.rows.length * 40 ;
         let aList = this.props.filter === undefined  ? this.props.reports : this.props.filter;
         const reports = aList.map((value, index) => {
             return (
@@ -156,7 +155,7 @@ class Reports extends Component {
                 </TableRow>
             );
         });
-        let sum = reports.length * this.props.store.infoCompany.orderValue;
+        let sum = reports.length * 40;
         return (
             <div> {this.state.isLoading ? (
                 <div className="Loading_div">
@@ -241,7 +240,6 @@ class Reports extends Component {
                         <Filter/>
                     </div>
                 </div>
-                <ToastContainer/>
             </div>
             </div>
         );

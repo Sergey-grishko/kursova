@@ -1,24 +1,20 @@
 import {actionType} from "../reducers/Company";
-import {store} from "../App";
+import {store} from "../index";
 import {infoUsers} from "./actionUsers";
-import {host} from '../Host'
+import {host} from '../host'
+import Api from "./api";
+
 
 export async function infoReports() {
-    let token = localStorage.getItem('token');
-    return await fetch(host + "reports",
-        {
-            method: "GET",
-            headers: {
-                "Authorization": token
-            }
-        }).then((response)=>response.json()).then((res)=> {
-        store.dispatch({
-            type: actionType.INFO_REPORTS,
-            payload: res.message
-        });
-        return res;
+    let res = await Api.get('reports');
+    let data = await res.json()
+    store.dispatch({
+        type: actionType.INFO_REPORTS,
+        payload: data.message
     });
+    return data
 }
+
 
 export async function EditReport(_id, category_id, comment, approved) {
     let token = localStorage.getItem('token');

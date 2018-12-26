@@ -6,7 +6,7 @@ export const actionType = {
     INFO_REPORTS: 'INFO_REPORTS',
     LIST:'LIST',
     FILTER_USER: "FILTER_USER",
-
+    loading: 'loading',
 };
 
 const defaultState = {
@@ -35,34 +35,31 @@ const defaultState = {
     list: [],
     filter: {
         user_id: 'all',
+    },
+    loading: {
+        enable: false,
     }
 };
-
-
 
 export default function Info(state = defaultState, action) {
     switch (action.type) {
         case "INFO_COMPANY":
             return {...state, infoCompany: action.payload};
-            break;
         case "DEFAULT":
             return {...state,
                 filter: {
                     user_id: 'all',
                 }};
-            break;
         case "INFO_DASHBOARD":
             return {...state, infoDashboard: action.payload};
-            break;
         case "INFO_USERS":
             return {...state, infoUsers: action.payload};
-            break;
+        case "loading":
+            return {...state, loading: action.payload};
         case "INFO_REPORTS":
             return {...state, infoReports: action.payload};
-            break;
         case "LIST":
             return {...state, list: action.payload};
-            break;
         case "FILTER_USER":
             return {...state, filter: {...state.filter, user_id: action.user}};
         default:

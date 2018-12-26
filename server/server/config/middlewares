@@ -1,0 +1,25 @@
+import jwt from 'jsonwebtoken';
+import config from './jwtSecret';
+
+export async function verify(req, res, next){
+    let token = req.headers.authorization;
+    if(token==undefined) {
+        req.user=null;
+        return next();
+    }
+    try{
+        token=jwt.verify(req.headers.authorization, config.jwtSecret);
+        req.user={
+            status:token.status,
+            _id:token._id,
+        };
+        if(token.company_id!=undefined) req.user.company_id=token.company_id
+        next();
+    } catch(e) {
+        res.status(400).json({ error: e.message })
+    }
+}
+
+export async function error404(req, res) {
+    return res.status(404).sendFile(__dirname+'/404/index.html')
+}

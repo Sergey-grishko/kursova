@@ -1,1 +1,1 @@
-export const host = "http://web.bidon-tech.com:65059/";
+export const host = "http://127.0.0.1:65059/";
